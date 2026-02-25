@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Rajat Vig — Senior Software Engineer, Tech Lead & Cloud Architect | 10+ years building scalable cloud-native systems at Infosys, Weavik, Cognizant & Accenture.">
+    <title>Rajat Vig | Senior Software Engineer • Tech Lead • Cloud Architect</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+        
+        html {
+            scroll-padding-top: 3rem;   /* tells browser to leave space above target when scrolling to #id */
+        }
+
+        :root {
+            --accent: 234 179 8;
+        }
+        
+        .hero-bg {
+            background: radial-gradient(circle at 30% 20%, rgba(234, 179, 8, 0.12) 0%, transparent 50%);
+            padding-top: 7rem !important;
+        }
+        
+        .timeline-line {
+            position: absolute;
+            left: 31px;
+            top: 48px;
+            bottom: -20px;
+            width: 3px;
+            background: linear-gradient(to bottom, #eab308, #64748b);
+        }
+        
+        .skill-pill {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .skill-pill:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.2), 0 8px 10px -6px rgb(0 0 0 / 0.2);
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(to right, rgb(234 179 8), transparent);
+            bottom: -6px;
+            left: 0;
+        }
+
+        /* Light mode overrides */
+        html:not(.dark) body {
+            background-color: #f8fafc;
+            color: #0f172a;
+        }
+
+        html:not(.dark) nav {
+            background-color: #ffffff !important;
+            border-bottom-color: #e5e7eb !important;
+        }
+
+        html:not(.dark) .bg-zinc-950 { background-color: #ffffff; }
+        html:not(.dark) .bg-zinc-900  { background-color: #f1f5f9; }
+        html:not(.dark) .text-zinc-200 { color: #1e293b; }
+        html:not(.dark) .text-zinc-300 { color: #334155; }
+        html:not(.dark) .text-zinc-400 { color: #64748b; }
+        html:not(.dark) .border-zinc-800 { border-color: #cbd5e1; }
+        html:not(.dark) .border-zinc-700 { border-color: #e2e8f0; }
+
+        html:not(.dark) .hero-bg {
+            background: radial-gradient(circle at 30% 20%, rgba(234,179,8,0.18) 0%, transparent 50%);
+        }
+
+        /* Force navbar text black in light mode */
+        html:not(.dark) nav span.text-white,
+        html:not(.dark) nav a {
+            color: #0f172a !important;
+        }
+        html:not(.dark) nav a:hover {
+            color: rgb(234 179 8) !important;
+        }
+
+        /* Mobile menu black text in light mode */
+        html:not(.dark) #mobile-menu {
+            background-color: #ffffff !important;
+            border-top-color: #e5e7eb !important;
+        }
+        html:not(.dark) #mobile-menu a {
+            color: #0f172a !important;
+        }
+        html:not(.dark) #mobile-menu a:hover {
+            color: rgb(234 179 8) !important;
+        }
+
+        /* Hero title color switching — highest specificity */
+        .hero-title {
+            color: black;
+        }
+        .dark .hero-title {
+            color: white;
+        }
+        /* Footer in light mode */
+        html:not(.dark) footer {
+            background-color: #ffffff;
+            color: #0f172a;
+            border-top-color: #e2e8f0 !important; /* light gray border */
+        }
+
+        html:not(.dark) footer a,
+        html:not(.dark) footer span {
+            color: #0f172a !important;
+        }/* Footer in light mode */
+        html:not(.dark) footer {
+            background-color: #ffffff;
+            color: #0f172a;
+            border-top-color: #e2e8f0 !important; /* light gray border */
+        }
+
+        html:not(.dark) footer a,
+        html:not(.dark) footer span {
+            color: #0f172a !important;
+        }
+
+        nav .flex.items-center.gap-3 {
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        nav .flex.items-center.gap-3:hover {
+            opacity: 0.85;
+        }
+
+    </style>
+</head>
+<body class="bg-zinc-950 text-zinc-200 font-sans leading-relaxed">
+    <!-- NAVBAR -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-zinc-950/90 backdrop-blur-xl border-b border-zinc-800">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 bg-gradient-to-br from-amber-400 to-yellow-600 rounded-2xl flex items-center justify-center text-zinc-950 font-bold text-2xl leading-none pt-0.5">RV</div>
+                <div>
+                    <span class="font-semibold tracking-tighter text-2xl text-white">Rajat Vig</span>
+                </div>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-10 text-sm font-medium">
+                <a href="#about" class="hover:text-amber-400 transition-colors">About</a>
+                <a href="#skills" class="hover:text-amber-400 transition-colors">Skills</a>
+                <a href="#experience" class="hover:text-amber-400 transition-colors">Experience</a>
+                <a href="#education" class="hover:text-amber-400 transition-colors">Education</a>
+                <a href="#contact" class="hover:text-amber-400 transition-colors">Contact</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <button id="theme-toggle" class="w-10 h-10 flex items-center justify-center rounded-2xl hover:bg-zinc-900 transition-colors" aria-label="Toggle theme">
+                    <i class="fa-solid fa-sun text-xl text-amber-400" id="theme-icon"></i>
+                </button>
+                <a href="https://linkedin.com/in/rajat-vig-64049b99" target="_blank" 
+                   class="px-6 py-3 bg-[rgb(234,179,8)] text-zinc-950 rounded-3xl font-semibold flex items-center gap-2 hover:brightness-110 transition-all active:scale-95">
+                    <i class="fa-brands fa-linkedin"></i>
+                    <span>LinkedIn</span>
+                </a>
+                <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" 
+                        class="md:hidden w-10 h-10 flex items-center justify-center">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-zinc-900 border-t border-zinc-800 py-6">
+            <div class="flex flex-col gap-6 px-8 text-lg">
+                <a href="#about" class="hover:text-amber-400">About</a>
+                <a href="#skills" class="hover:text-amber-400">Skills</a>
+                <a href="#experience" class="hover:text-amber-400">Experience</a>
+                <a href="#education" class="hover:text-amber-400">Education</a>
+                <a href="#contact" class="hover:text-amber-400">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero-bg min-h-screen flex items-center pt-20">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+            <div class="space-y-8">
+                <div class="inline-flex items-center gap-2 bg-zinc-900 border border-amber-400/30 rounded-3xl px-5 py-2 text-sm">
+                    <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                    Open to FAANG Tech Lead / Architect roles — Canada & Remote
+                </div>
+                
+                <!-- FIXED: using custom class with higher specificity -->
+                <h1 class="hero-title text-7xl md:text-8xl font-bold tracking-tighter leading-none">
+                    RAJAT<br>VIG
+                </h1>
+                
+                <p class="text-3xl text-zinc-400 font-light tracking-tight">
+                    Senior Software Engineer<br>
+                    <span class="text-amber-400">Tech Lead & Cloud Architect</span>
+                </p>
+                
+                <p class="max-w-md text-zinc-400 text-lg">
+                    10+ years architecting and shipping high-scale cloud-native systems in FinTech and SaaS. 
+                    Passionate about clean architecture, event-driven design, and mentoring high-performing teams.
+                </p>
+                
+                <div class="flex flex-wrap gap-4">
+                    <a href="#contact" 
+                       class="px-10 py-4 bg-amber-400 hover:bg-amber-300 transition-all text-zinc-950 rounded-3xl font-semibold flex items-center gap-3 group">
+                        LET'S CONNECT
+                        <i class="fa-solid fa-arrow-right group-active:rotate-45 transition-transform"></i>
+                    </a>
+                    
+                    <a href="https://linkedin.com/in/rajat-vig-64049b99" target="_blank"
+                       class="px-8 py-4 border border-zinc-700 hover:border-amber-400 rounded-3xl font-medium flex items-center gap-3 transition-all">
+                        <i class="fa-brands fa-linkedin text-xl"></i>
+                        View LinkedIn
+                    </a>
+                    
+                    <button onclick="downloadResume()" 
+                            class="px-8 py-4 border border-zinc-700 hover:border-white rounded-3xl font-medium flex items-center gap-3 transition-all">
+                        <i class="fa-solid fa-download"></i>
+                        Download CV
+                    </button>
+                </div>
+                
+                <div class="flex items-center gap-8 text-sm pt-8">
+                    <div>
+                        <span class="block text-amber-400 text-2xl font-semibold">10+</span>
+                        <span class="text-zinc-500">Years Experience</span>
+                    </div>
+                    <div>
+                        <span class="block text-amber-400 text-2xl font-semibold">5</span>
+                        <span class="text-zinc-500">Enterprise Clients</span>
+                    </div>
+                    <div>
+                        <span class="block text-amber-400 text-2xl font-semibold">40%</span>
+                        <span class="text-zinc-500">Faster Deployments</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Hero Visual -->
+            <div class="relative hidden md:block">
+                <div class="absolute -inset-20 bg-gradient-to-br from-amber-400/10 via-transparent to-transparent rounded-[4rem] -rotate-6"></div>
+                <div class="bg-zinc-900 border border-zinc-700 rounded-3xl p-3 shadow-2xl">
+                    <img src="https://via.placeholder.com/600x700/18181b/fff?text=Professional+Photo" 
+                         alt="Rajat Vig" 
+                         class="rounded-2xl w-full aspect-[4/5] object-cover grayscale hover:grayscale-0 transition-all duration-700">
+                         
+                    <div class="absolute bottom-8 right-8 bg-zinc-950 border border-amber-400/50 rounded-2xl px-6 py-3 text-sm backdrop-blur-xl">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-map-marker-alt text-amber-400"></i>
+                            <div>
+                                <div class="font-medium">Waterloo, Ontario</div>
+                                <div class="text-xs text-zinc-500">Canada</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-xs tracking-widest text-zinc-500">
+            <div>SCROLL FOR MORE</div>
+            <div class="w-px h-12 bg-gradient-to-b from-transparent via-zinc-400 to-transparent"></div>
+        </div>
+    </section>
+
+    <!-- ABOUT / PROFILE -->
+    <section id="about" class="max-w-5xl mx-auto px-6 py-24">
+        <div class="grid md:grid-cols-12 gap-16">
+            <div class="md:col-span-5">
+                <h2 class="section-title text-5xl font-semibold tracking-tight text-white">About Me</h2>
+                <div class="mt-6 text-amber-400 text-sm font-mono">01 / PROFILE</div>
+            </div>
+            <div class="md:col-span-7 space-y-6 text-lg leading-relaxed text-zinc-300">
+                <p class="text-balance">
+                    Seasoned full-stack engineer and technical leader with over 10 years of hands-on experience in designing, building, and scaling mission-critical applications in the Financial Services and SaaS domains.
+                </p>
+                <p class="text-balance">
+                    I specialize in cloud-native architectures, microservices, event-driven systems, and mentoring engineering teams to deliver exceptional quality at speed. 
+                    Strong believer in SOLID principles, clean code, and pragmatic system design that balances business value with long-term maintainability.
+                </p>
+                <div class="pt-4 flex gap-8 text-sm">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-check text-emerald-400"></i>
+                        <span>Ex-Infosys, Weavik, Cognizant, Accenture</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-check text-emerald-400"></i>
+                        <span>Currently in Waterloo, ON</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="bg-zinc-900 py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-end mb-16">
+                <div>
+                    <div class="text-amber-400 text-sm font-mono mb-2">02 / EXPERTISE</div>
+                    <h2 class="section-title text-5xl font-semibold tracking-tight">Technical Arsenal</h2>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Backend -->
+                <div class="bg-zinc-950 border border-zinc-800 rounded-3xl p-8 hover:border-amber-400/50 transition-all group">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-12 h-12 bg-orange-500/10 rounded-2xl flex items-center justify-center text-3xl">🔥</div>
+                        <div>
+                            <h3 class="font-semibold text-2xl">Backend</h3>
+                            <p class="text-xs text-zinc-500">Node • .NET • Architecture</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <div class="skill-pill bg-zinc-900 px-5 py-2 rounded-3xl text-sm border border-zinc-700">Node.js</div>
+                        <div class="skill-pill bg-zinc-900 px-5 py-2 rounded-3xl text-sm border border-zinc-700">NestJS</div>
+                        <div class="skill-pill bg-zinc-900 px-5 py-2 rounded-3xl text-sm border border-zinc-700">Express</div>
+                        <div class="skill-pill bg-zinc-900 px-5 py-2 rounded-3xl text-sm border border-zinc-700">TypeScript</div>
+                        <div class="skill-pill bg-zinc-900 px-5 py-2 rounded-3xl text-sm border border-zinc-700">C# • .NET Core</div>
+                        <div class="skill-pill bg-zinc-900 px-5 py-2 rounded-3xl text-sm border border-zinc-700">REST • GraphQL</div>
+                        <div class="skill-pill bg-zinc-900 px-5 py-2 rounded-3xl text-sm border border-zinc-700">RabbitMQ</div>
+                        <div class="skill-pill bg-zinc-900 px-5 py-2 rounded-3xl text-sm border border-zinc-700">PostgreSQL</div>
+                        <div class="skill-pill bg-zinc-900 px-5 py-2 rounded-3xl text-sm border border-zinc-700">SQL Server</div>
+                    </div>
+                </div>
+                
+                <!-- Frontend -->
+                <div class="bg-zinc-950 border border-zinc-800 rounded-3xl p-8 hover:border-amber-400/50 transition-all group">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-12 h-12 bg-sky-500/10 rounded-2xl flex items-center justify-center text-3xl">🎨</div>
+                        <div>
+                            <h3 class="font-semibold text-2xl">Frontend</h3>
+                            <p class="text-xs text-zinc-500">React • Next • Vue</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <div class="skill-pill bg-zinc-900 px-5 py-2 rounded-3xl text-sm border border-zinc-700">React</div>
+                        <div class="skill-pill bg-zinc-900 px-5 py-2 rounded-3xl text-sm border border-zinc-700">Next.js</div>
+                        <div class="skill-pill bg-zinc-900 px-5 py-2 rounded-3xl text-sm border border-zinc-700">TypeScript</div>
+                        <div class="skill-pill bg-zinc-900 px-5 py-2 rounded-3xl text-sm border border-zinc-700">Tailwind CSS</div>
+                        <div class="skill-pill bg-zinc-900 px-5 py-2 rounded-3xl text-sm border border-zinc-700">Vue.js</div>
+                        <div class="skill-pill bg-zinc-900 px-5 py-2 rounded-3xl text-sm border border-zinc-700">HTML5 • CSS3</div>
+                        <div class="skill-pill bg-zinc-900 px-5 py-2 rounded-3xl text-sm border border-zinc-700">Jest • Testing</div>
+                    </div>
+                </div>
+                
+                <!-- Cloud & DevOps -->
+                <div class="bg-zinc-950 border border-zinc-800 rounded-3xl p-8 hover:border-amber-400/50 transition-all group">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-12 h-12 bg-emerald-500/10 rounded-2xl flex items-center justify-center text-3xl">☁️</div>
+                        <div>
+                            <h3 class="font-semibold text-2xl">Cloud &amp; DevOps</h3>
+                            <p class="text-xs text-zinc-500">AWS • Azure • CI/CD</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <div class="skill-pill bg-zinc-900 px-5 py-2 rounded-3xl text-sm border border-zinc-700">AWS Lambda</div>
+                        <div class="skill-pill bg-zinc-900 px-5 py-2 rounded-3xl text-sm border border-zinc-700">API Gateway</div>
+                        <div class="skill-pill bg-zinc-900 px-5 py-2 rounded-3xl text-sm border border-zinc-700">Cognito</div>
+                        <div class="skill-pill bg-zinc-900 px-5 py-2 rounded-3xl text-sm border border-zinc-700">S3 • RDS</div>
+                        <div class="skill-pill bg-zinc-900 px-5 py-2 rounded-3xl text-sm border border-zinc-700">Azure Functions</div>
+                        <div class="skill-pill bg-zinc-900 px-5 py-2 rounded-3xl text-sm border border-zinc-700">Docker</div>
+                        <div class="skill-pill bg-zinc-900 px-5 py-2 rounded-3xl text-sm border border-zinc-700">CI/CD • Jenkins</div>
+                    </div>
+                </div>
+                
+                <!-- Leadership -->
+                <div class="bg-zinc-950 border border-zinc-800 rounded-3xl p-8 hover:border-amber-400/50 transition-all group">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-12 h-12 bg-violet-500/10 rounded-2xl flex items-center justify-center text-3xl">🏗️</div>
+                        <div>
+                            <h3 class="font-semibold text-2xl">Leadership</h3>
+                            <p class="text-xs text-zinc-500">Design • Mentoring</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4 text-sm">
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-amber-400 mt-1"></i>
+                            <div>Microservices &amp; Event-Driven Architecture</div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-amber-400 mt-1"></i>
+                            <div>SOLID • Design Patterns • Refactoring</div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-amber-400 mt-1"></i>
+                            <div>Team Mentoring &amp; Technical Leadership</div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-amber-400 mt-1"></i>
+                            <div>Agile • Scrum • System Design</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="max-w-5xl mx-auto px-6 py-24">
+        <div class="mb-16">
+            <div class="text-amber-400 text-sm font-mono">03 / JOURNEY</div>
+            <h2 class="section-title text-5xl font-semibold tracking-tight mt-3">Professional Experience</h2>
+        </div>
+        
+        <div class="relative pl-16 space-y-20">
+            <div class="timeline-line hidden lg:block"></div>
+            
+            <div class="relative">
+                <div class="absolute -left-3 top-2 w-8 h-8 bg-amber-400 rounded-2xl flex items-center justify-center text-zinc-950 font-bold shadow-xl">1</div>
+                <div class="grid md:grid-cols-12 gap-8">
+                    <div class="md:col-span-4 text-right md:pr-12">
+                        <div class="text-amber-400 font-medium">Aug 2021 — Present</div>
+                        <div class="text-white font-semibold text-xl mt-1">Technology Analyst</div>
+                        <div class="text-zinc-400">Infosys • Mississauga, ON</div>
+                    </div>
+                    <div class="md:col-span-8 bg-zinc-900 border border-zinc-800 rounded-3xl p-8">
+                        <ul class="space-y-4 text-zinc-300">
+                            <li>Led cloud-native SaaS platform using NestJS, TypeScript, PostgreSQL & AWS Lambda — reduced infra costs significantly</li>
+                            <li>Designed event-driven microservices with API Gateway, SNS/SQS and Cognito — achieved 99.99% uptime</li>
+                            <li>Mentored 8 engineers on best practices, SOLID, and system design — improved team velocity by 40%</li>
+                            <li>Built CI/CD pipelines with AWS CodePipeline — cut deployment time by 40%</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="relative">
+                <div class="absolute -left-3 top-2 w-8 h-8 bg-amber-400 rounded-2xl flex items-center justify-center text-zinc-950 font-bold shadow-xl">2</div>
+                <div class="grid md:grid-cols-12 gap-8">
+                    <div class="md:col-span-4 text-right md:pr-12">
+                        <div class="text-amber-400 font-medium">Apr 2020 — Aug 2021</div>
+                        <div class="text-white font-semibold text-xl mt-1">Software Developer</div>
+                        <div class="text-zinc-400">Weavik Inc. • Waterloo, ON</div>
+                    </div>
+                    <div class="md:col-span-8 bg-zinc-900 border border-zinc-800 rounded-3xl p-8">
+                        <ul class="space-y-4 text-zinc-300">
+                            <li>Architected full B2B/B2C platforms with Vue.js + Azure Functions + Cosmos DB</li>
+                            <li>Implemented real-time WebSockets & Webhooks with Azure Service Bus</li>
+                            <li>Reduced release cycle time through Azure DevOps CI/CD automation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center pt-12">
+                <a href="https://linkedin.com/in/rajat-vig-64049b99" target="_blank" 
+                   class="inline-flex items-center gap-3 text-amber-400 hover:text-white transition-colors text-lg font-medium">
+                    Full career timeline on LinkedIn 
+                    <span class="text-3xl">→</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- EDUCATION + CERTS -->
+    <section id="education" class="bg-zinc-900 py-24">
+        <div class="max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-20">
+            <div>
+                <div class="text-amber-400 text-sm font-mono mb-6">04 / EDUCATION</div>
+                <h3 class="text-4xl font-semibold mb-8">Academic Background</h3>
+                <div class="space-y-10">
+                    <div>
+                        <div class="flex justify-between">
+                            <div>
+                                <div class="font-semibold">Mobile Solutions Development (Co-op)</div>
+                                <div class="text-zinc-400">Conestoga College, Waterloo • Dec 2020</div>
+                            </div>
+                            <div class="text-right text-emerald-400 font-medium">GPA 3.75<br>Distinction</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between">
+                            <div>
+                                <div class="font-semibold">B.Tech Computer Science & Engineering</div>
+                                <div class="text-zinc-400">Manav Rachna International University • May 2015</div>
+                            </div>
+                            <div class="text-right text-emerald-400 font-medium">First Division</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-amber-400 text-sm font-mono mb-6">05 / CERTIFICATIONS</div>
+                <div class="space-y-6">
+                    <div class="flex gap-6">
+                        <div class="text-4xl">📜</div>
+                        <div>
+                            <div class="font-medium">Full Stack Web Development (Ruby on Rails + JS)</div>
+                            <div class="text-zinc-400 text-sm">Coding Ninjas • Nov 2017</div>
+                        </div>
+                    </div>
+                    <div class="flex gap-6">
+                        <div class="text-4xl">📜</div>
+                        <div>
+                            <div class="font-medium">Java - J2EE, Struts 2</div>
+                            <div class="text-zinc-400 text-sm">CMC Limited • Jun 2015</div>
+                        </div>
+                    </div>
+                    <div class="flex gap-6">
+                        <div class="text-4xl">📜</div>
+                        <div>
+                            <div class="font-medium">SaaS using Ruby on Rails</div>
+                            <div class="text-zinc-400 text-sm">UC Berkeley via edX • Feb 2013</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="max-w-3xl mx-auto px-6 py-32 text-center">
+        <div class="text-amber-400 text-sm font-mono mb-4">06 / NEXT CHAPTER</div>
+        <h2 class="text-6xl font-semibold tracking-tighter leading-none mb-8">Let's build something<br>extraordinary together</h2>
+        <p class="text-2xl text-zinc-400 max-w-lg mx-auto mb-12">
+            Open to Staff Engineer, Principal Engineer, Tech Lead, Technical Architect, and Engineering Manager roles at high-growth technology companies.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-6 justify-center">
+            <a href="mailto:rajatvig71@gmail.com" 
+              class="group px-12 py-6 bg-[rgb(234,179,8)] text-zinc-950 rounded-3xl font-semibold text-xl flex items-center justify-center gap-4 hover:brightness-110 transition-all">
+                rajatvig71@gmail.com
+                <span class="text-3xl group-hover:rotate-12 transition-transform">✉️</span>
+            </a>
+            <a href="tel:+16476757365" 
+              class="px-12 py-6 border-2 border-zinc-700 hover:border-amber-400 rounded-3xl font-semibold text-xl transition-all">
+                +1 (647) 675-7365
+            </a>
+        </div>
+        
+        <div class="mt-16 text-xs text-zinc-500 font-mono tracking-widest">
+            WATERLOO, ONTARIO • AVAILABLE FOR IMMEDIATE START
+        </div>
+    </section>
+
+    <footer class="bg-black py-12 border-t border-zinc-900 text-center text-xs text-zinc-500">
+        <div class="max-w-7xl mx-auto px-6">
+            © 2026 Rajat Vig • Crafted with precision in Waterloo, Canada
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        const html = document.documentElement;
+        const toggleBtn = document.getElementById('theme-toggle');
+        const icon = document.getElementById('theme-icon');
+
+        function setTheme(isDark) {
+            if (isDark) {
+                html.classList.add('dark');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                html.classList.remove('dark');
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+            localStorage.setItem('portfolio-theme', isDark ? 'dark' : 'light');
+        }
+
+        // Force dark mode by default
+        let savedTheme = localStorage.getItem('portfolio-theme');
+        if (savedTheme) {
+            setTheme(savedTheme === 'dark');
+        } else {
+            setTheme(true);
+        }
+
+        toggleBtn.addEventListener('click', () => {
+            const isCurrentlyDark = html.classList.contains('dark');
+            setTheme(!isCurrentlyDark);
+        });
+
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (mobileMenu) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        function downloadResume() {
+            window.print();
+        }
+
+        const printStyle = document.createElement('style');
+        printStyle.innerHTML = `
+            @media print {
+                nav, #theme-toggle, .hero-bg > div:last-child { display: none !important; }
+                body { background: white !important; color: black !important; }
+                .bg-zinc-900, .bg-zinc-950 { background: white !important; }
+                .text-zinc-200, .text-zinc-300 { color: black !important; }
+                .border-zinc-800 { border-color: #ddd !important; }
+            }
+        `;
+        document.head.appendChild(printStyle);
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === '/' && document.activeElement.tagName !== "INPUT" && document.activeElement.tagName !== "TEXTAREA") {
+                e.preventDefault();
+                document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+
+        document.querySelector('nav .flex.items-center.gap-3').addEventListener('click', (e) => {
+            // Prevent if clicking inside child elements that shouldn't trigger
+            if (!e.target.closest('a, button')) {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+
+        console.log('%cPortfolio ready for FAANG applications 🚀', 'color:#eab308; font-family:monospace');
+    </script>
+</body>
+</html>

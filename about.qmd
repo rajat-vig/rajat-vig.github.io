@@ -2,4 +2,14 @@
 title: "About"
 ---
 
-About this site
+## Background
+
+I grew up in India and later moved to Ontario, Canada. I studied Computer Science and began my career as a Full Stack Developer, where I gained experience building and working on software applications. After working in software development, I decided to pursue the MDSCL program at UBC to expand my skills and explore the intersection of data, language, and technology.
+
+## Why Data Science
+
+My interest in data science comes from wanting to understand how data can be used to answer questions, uncover patterns, and build intelligent solutions. With my background in software development, I was particularly drawn to the combination of programming, problem-solving, and machine learning. I chose to pursue the MDSCL program at UBC as an opportunity to develop these skills and explore a future in Machine Learning Engineering and AI Research.
+
+## Outside of Data Science
+
+Outside of school and work, I enjoy watching movies, gaming, and cooking. I especially enjoy hosting friends and family, whether it’s for a casual game night or a meal I’ve prepared. These activities give me a chance to be creative, relax, and spend time with the people around me.

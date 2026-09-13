@@ -1,10 +1,10 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "Blog",
     "section": "",
-    "text": "I grew up in India and later moved to Ontario, Canada. I studied Computer Science and began my career as a Full Stack Developer, where I gained experience building and working on software applications. After working in software development, I decided to pursue the MDSCL program at UBC to expand my skills and explore the intersection of data, language, and technology."
+    "text": "My first weeks in MDS\n\n\n\n\n\n\n\n\nSep 12, 2026\n\n\nRajat Vig\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
@@ -12,6 +12,20 @@
     "title": "Rajat Vig",
     "section": "",
     "text": "Hi! I’m Rajat Vig, a Master of Data Science in Computational Linguistics student at UBC. Originally from India, I moved to Ontario, where I worked as a Full Stack Developer before starting the MDSCL program. I’m now looking to build on my software development background and explore opportunities in Machine Learning Engineering and AI Research. I’m excited to learn, experiment, and apply data science to solve interesting problems."
+  },
+  {
+    "objectID": "posts/first-weeks/index.html",
+    "href": "posts/first-weeks/index.html",
+    "title": "My first weeks in MDS",
+    "section": "",
+    "text": "Starting the MDSCL program at UBC has been an exciting new chapter for me. Orientation was a great opportunity to meet my classmates, learn more about the program, and get a sense of what the next year will look like. Coming from a software development background, I’m looking forward to bringing my previous experience into this new environment.\nMy first classes have been a mix of challenging and interesting. One thing that surprised me was how quickly we were introduced to new concepts and how much collaboration and hands-on learning is involved. It has been a good reminder that there is always more to learn, even with a background in technology.\nNow that I’ve started settling into the program, I’m feeling excited and motivated about what’s ahead. I’m looking forward to strengthening my skills in data science, machine learning, and computational linguistics while working on interesting projects with my classmates. I’m especially excited to see how the program shapes my path toward ML Engineering and AI Research.\n\n\n\nOrientation day on campus."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "I grew up in India and later moved to Ontario, Canada. I studied Computer Science and began my career as a Full Stack Developer, where I gained experience building and working on software applications. After working in software development, I decided to pursue the MDSCL program at UBC to expand my skills and explore the intersection of data, language, and technology."
   },
   {
     "objectID": "about.html#background",
@@ -33,19 +47,5 @@
     "title": "About",
     "section": "Outside of Data Science",
     "text": "Outside of Data Science\nOutside of school and work, I enjoy watching movies, gaming, and cooking. I especially enjoy hosting friends and family, whether it’s for a casual game night or a meal I’ve prepared. These activities give me a chance to be creative, relax, and spend time with the people around me."
-  },
-  {
-    "objectID": "posts/first-weeks/index.html",
-    "href": "posts/first-weeks/index.html",
-    "title": "My first weeks in MDS",
-    "section": "",
-    "text": "Starting the MDSCL program at UBC has been an exciting new chapter for me. Orientation was a great opportunity to meet my classmates, learn more about the program, and get a sense of what the next year will look like. Coming from a software development background, I’m looking forward to bringing my previous experience into this new environment.\nMy first classes have been a mix of challenging and interesting. One thing that surprised me was how quickly we were introduced to new concepts and how much collaboration and hands-on learning is involved. It has been a good reminder that there is always more to learn, even with a background in technology.\nNow that I’ve started settling into the program, I’m feeling excited and motivated about what’s ahead. I’m looking forward to strengthening my skills in data science, machine learning, and computational linguistics while working on interesting projects with my classmates. I’m especially excited to see how the program shapes my path toward ML Engineering and AI Research.\n\n\n\nOrientation day on campus."
-  },
-  {
-    "objectID": "blog.html",
-    "href": "blog.html",
-    "title": "Blog",
-    "section": "",
-    "text": "My first weeks in MDS\n\n\n\n\n\n\n\n\nSep 12, 2026\n\n\nRajat Vig\n\n\n\n\n\nNo matching items"
   }
 ]

@@ -103,5 +103,61 @@
     "title": "Penguin Body Mass Across Species",
     "section": "Conclusion",
     "text": "Conclusion\nUsing Python, I loaded the Palmer Penguins dataset, inspected its structure, removed observations with missing values for the variables of interest, calculated species-level body-mass summaries, and created a visualization of the distributions.\nThis provides a reproducible computational workflow in Python because the data loading, cleaning, summary calculations, and visualization are all performed by code when the Quarto document is rendered."
+  },
+  {
+    "objectID": "posts/flipper-body-mass/index.html",
+    "href": "posts/flipper-body-mass/index.html",
+    "title": "Flipper Length and Body Mass in Penguins",
+    "section": "",
+    "text": "The Palmer Penguins dataset contains measurements collected from penguins observed near Palmer Station in Antarctica. In this analysis, I examine the relationship between flipper length and body mass across the three penguin species.\nThe goal is to summarize the measurements by species and visualize the relationship between flipper length and body mass.\nData source: Palmer Penguins, created by Allison Horst using data from Palmer Station Antarctica LTER."
+  },
+  {
+    "objectID": "posts/flipper-body-mass/index.html#introduction",
+    "href": "posts/flipper-body-mass/index.html#introduction",
+    "title": "Flipper Length and Body Mass in Penguins",
+    "section": "",
+    "text": "The Palmer Penguins dataset contains measurements collected from penguins observed near Palmer Station in Antarctica. In this analysis, I examine the relationship between flipper length and body mass across the three penguin species.\nThe goal is to summarize the measurements by species and visualize the relationship between flipper length and body mass.\nData source: Palmer Penguins, created by Allison Horst using data from Palmer Station Antarctica LTER."
+  },
+  {
+    "objectID": "posts/flipper-body-mass/index.html#load-and-inspect-the-data",
+    "href": "posts/flipper-body-mass/index.html#load-and-inspect-the-data",
+    "title": "Flipper Length and Body Mass in Penguins",
+    "section": "Load and inspect the data",
+    "text": "Load and inspect the data\nThe dataset is provided by the palmerpenguins R package, so the analysis does not require downloading a data file from the internet at render time.\n\n\n\nTable 1\n\n\nlibrary(palmerpenguins)\nlibrary(dplyr)\nlibrary(ggplot2)\n\npenguins_data &lt;- penguins\n\ncat(\"Rows:\", nrow(penguins_data), \"\\n\")\n\nRows: 344 \n\ncat(\"Columns:\", ncol(penguins_data), \"\\n\")\n\nColumns: 8 \n\nhead(penguins_data)\n\n# A tibble: 6 × 8\n  species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g\n  &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;\n1 Adelie  Torgersen           39.1          18.7               181        3750\n2 Adelie  Torgersen           39.5          17.4               186        3800\n3 Adelie  Torgersen           40.3          18                 195        3250\n4 Adelie  Torgersen           NA            NA                  NA          NA\n5 Adelie  Torgersen           36.7          19.3               193        3450\n6 Adelie  Torgersen           39.3          20.6               190        3650\n# ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;\n\n\n\n\nThe dataset contains 344 observations and eight variables."
+  },
+  {
+    "objectID": "posts/flipper-body-mass/index.html#prepare-the-data",
+    "href": "posts/flipper-body-mass/index.html#prepare-the-data",
+    "title": "Flipper Length and Body Mass in Penguins",
+    "section": "Prepare the data",
+    "text": "Prepare the data\nFor this analysis, I need observations with both flipper length and body mass available. I remove observations missing either measurement.\n\n\n\nTable 2\n\n\nanalysis_data &lt;- penguins_data %&gt;%\n  filter(\n    !is.na(flipper_length_mm),\n    !is.na(body_mass_g),\n    !is.na(species)\n  )\n\ncat(\"Rows before cleaning:\", nrow(penguins_data), \"\\n\")\n\nRows before cleaning: 344 \n\ncat(\"Rows after cleaning:\", nrow(analysis_data), \"\\n\")\n\nRows after cleaning: 342 \n\ncat(\n  \"Rows removed:\",\n  nrow(penguins_data) - nrow(analysis_data),\n  \"\\n\"\n)\n\nRows removed: 2 \n\nhead(analysis_data)\n\n# A tibble: 6 × 8\n  species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g\n  &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;\n1 Adelie  Torgersen           39.1          18.7               181        3750\n2 Adelie  Torgersen           39.5          17.4               186        3800\n3 Adelie  Torgersen           40.3          18                 195        3250\n4 Adelie  Torgersen           36.7          19.3               193        3450\n5 Adelie  Torgersen           39.3          20.6               190        3650\n6 Adelie  Torgersen           38.9          17.8               181        3625\n# ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;\n\n\n\n\nThe cleaned dataset contains the observations needed to examine the relationship between flipper length and body mass."
+  },
+  {
+    "objectID": "posts/flipper-body-mass/index.html#summarize-by-species",
+    "href": "posts/flipper-body-mass/index.html#summarize-by-species",
+    "title": "Flipper Length and Body Mass in Penguins",
+    "section": "Summarize by species",
+    "text": "Summarize by species\nI calculate the number of observations, mean flipper length, mean body mass, and the correlation between the two measurements for each species.\n\n\n\nTable 3\n\n\nspecies_summary &lt;- analysis_data %&gt;%\n  group_by(species) %&gt;%\n  summarise(\n    observations = n(),\n    mean_flipper_mm = mean(flipper_length_mm),\n    mean_body_mass_g = mean(body_mass_g),\n    correlation = cor(flipper_length_mm, body_mass_g),\n    .groups = \"drop\"\n  ) %&gt;%\n  mutate(\n    across(\n      c(mean_flipper_mm, mean_body_mass_g, correlation),\n      ~ round(.x, 2)\n    )\n  )\n\nspecies_summary\n\n# A tibble: 3 × 5\n  species   observations mean_flipper_mm mean_body_mass_g correlation\n  &lt;fct&gt;            &lt;int&gt;           &lt;dbl&gt;            &lt;dbl&gt;       &lt;dbl&gt;\n1 Adelie             151            190.            3701.        0.47\n2 Chinstrap           68            196.            3733.        0.64\n3 Gentoo             123            217.            5076.        0.7 \n\n\n\n\nThe summary provides information about typical flipper length, typical body mass, and the strength of the linear association between the two measurements within each species."
+  },
+  {
+    "objectID": "posts/flipper-body-mass/index.html#visualize-the-relationship",
+    "href": "posts/flipper-body-mass/index.html#visualize-the-relationship",
+    "title": "Flipper Length and Body Mass in Penguins",
+    "section": "Visualize the relationship",
+    "text": "Visualize the relationship\nThe following figure plots body mass against flipper length. Each point represents one penguin, and the fitted lines show the linear relationship within each species.\n\nggplot(\n  analysis_data,\n  aes(\n    x = flipper_length_mm,\n    y = body_mass_g,\n    color = species\n  )\n) +\n  geom_point(alpha = 0.7) +\n  geom_smooth(\n    method = \"lm\",\n    se = FALSE\n  ) +\n  labs(\n    title = \"Flipper Length and Body Mass\",\n    x = \"Flipper length (mm)\",\n    y = \"Body mass (g)\",\n    color = \"Species\"\n  ) +\n  theme_minimal()\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\n\n\n\n\n\n\nFigure 1: Relationship between flipper length and body mass by penguin species."
+  },
+  {
+    "objectID": "posts/flipper-body-mass/index.html#findings",
+    "href": "posts/flipper-body-mass/index.html#findings",
+    "title": "Flipper Length and Body Mass in Penguins",
+    "section": "Findings",
+    "text": "Findings\nThe summary statistics and figure show a positive relationship between flipper length and body mass in the Palmer Penguins data. Penguins with longer flippers generally have greater body mass.\nThe relationship can also be examined separately by species. The species summary provides a correlation for each group, while the fitted lines in the figure show the direction of the relationship visually.\nThese results are descriptive and summarize the observations in this dataset. They do not establish that flipper length causes differences in body mass."
+  },
+  {
+    "objectID": "posts/flipper-body-mass/index.html#conclusion",
+    "href": "posts/flipper-body-mass/index.html#conclusion",
+    "title": "Flipper Length and Body Mass in Penguins",
+    "section": "Conclusion",
+    "text": "Conclusion\nUsing R, I loaded the Palmer Penguins dataset, inspected its structure, removed observations with missing values for the variables of interest, calculated species-level summaries and correlations, and created a visualization of the relationship between flipper length and body mass.\nThe analysis demonstrates a reproducible R workflow because the data processing, calculations, and figure are generated from code when the Quarto document is rendered."
   }
 ]

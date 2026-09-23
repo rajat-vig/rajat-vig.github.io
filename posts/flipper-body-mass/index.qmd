@@ -1,0 +1,162 @@
+---
+title: "Flipper Length and Body Mass in Penguins"
+author: "Rajat Vig"
+date: "2026-09-23"
+format:
+  html:
+    toc: true
+---
+
+## Introduction
+
+The Palmer Penguins dataset contains measurements collected from penguins
+observed near Palmer Station in Antarctica. In this analysis, I examine the
+relationship between flipper length and body mass across the three penguin
+species.
+
+The goal is to summarize the measurements by species and visualize the
+relationship between flipper length and body mass.
+
+**Data source:** [Palmer Penguins](https://allisonhorst.github.io/palmerpenguins/),
+created by Allison Horst using data from Palmer Station Antarctica LTER.
+
+## Load and inspect the data
+
+The dataset is provided by the `palmerpenguins` R package, so the analysis
+does not require downloading a data file from the internet at render time.
+
+```{r}
+#| label: tbl-data-preview
+#| message: false
+#| warning: false
+
+library(palmerpenguins)
+library(dplyr)
+library(ggplot2)
+
+penguins_data <- penguins
+
+cat("Rows:", nrow(penguins_data), "\n")
+cat("Columns:", ncol(penguins_data), "\n")
+
+head(penguins_data)
+```
+
+The dataset contains 344 observations and eight variables.
+
+## Prepare the data
+
+For this analysis, I need observations with both flipper length and body
+mass available. I remove observations missing either measurement.
+
+```{r}
+#| label: tbl-clean-data
+
+analysis_data <- penguins_data %>%
+  filter(
+    !is.na(flipper_length_mm),
+    !is.na(body_mass_g),
+    !is.na(species)
+  )
+
+cat("Rows before cleaning:", nrow(penguins_data), "\n")
+cat("Rows after cleaning:", nrow(analysis_data), "\n")
+cat(
+  "Rows removed:",
+  nrow(penguins_data) - nrow(analysis_data),
+  "\n"
+)
+
+head(analysis_data)
+```
+
+The cleaned dataset contains the observations needed to examine the
+relationship between flipper length and body mass.
+
+## Summarize by species
+
+I calculate the number of observations, mean flipper length, mean body mass,
+and the correlation between the two measurements for each species.
+
+```{r}
+#| label: tbl-species-summary
+
+species_summary <- analysis_data %>%
+  group_by(species) %>%
+  summarise(
+    observations = n(),
+    mean_flipper_mm = mean(flipper_length_mm),
+    mean_body_mass_g = mean(body_mass_g),
+    correlation = cor(flipper_length_mm, body_mass_g),
+    .groups = "drop"
+  ) %>%
+  mutate(
+    across(
+      c(mean_flipper_mm, mean_body_mass_g, correlation),
+      ~ round(.x, 2)
+    )
+  )
+
+species_summary
+```
+
+The summary provides information about typical flipper length, typical body
+mass, and the strength of the linear association between the two measurements
+within each species.
+
+## Visualize the relationship
+
+The following figure plots body mass against flipper length. Each point
+represents one penguin, and the fitted lines show the linear relationship
+within each species.
+
+```{r}
+#| label: fig-flipper-body-mass
+#| fig-cap: "Relationship between flipper length and body mass by penguin species."
+
+ggplot(
+  analysis_data,
+  aes(
+    x = flipper_length_mm,
+    y = body_mass_g,
+    color = species
+  )
+) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(
+    method = "lm",
+    se = FALSE
+  ) +
+  labs(
+    title = "Flipper Length and Body Mass",
+    x = "Flipper length (mm)",
+    y = "Body mass (g)",
+    color = "Species"
+  ) +
+  theme_minimal()
+```
+
+## Findings
+
+The summary statistics and figure show a positive relationship between
+flipper length and body mass in the Palmer Penguins data. Penguins with
+longer flippers generally have greater body mass.
+
+The relationship can also be examined separately by species. The species
+summary provides a correlation for each group, while the fitted lines in the
+figure show the direction of the relationship visually.
+
+These results are descriptive and summarize the observations in this
+dataset. They do not establish that flipper length causes differences in
+body mass.
+
+## Conclusion
+
+Using R, I loaded the Palmer Penguins dataset, inspected its structure,
+removed observations with missing values for the variables of interest,
+calculated species-level summaries and correlations, and created a
+visualization of the relationship between flipper length and body mass.
+
+The analysis demonstrates a reproducible R workflow because the data
+processing, calculations, and figure are generated from code when the
+Quarto document is rendered.

@@ -1,6 +1,6 @@
-.quarto
-_site
+.quarto/
+_site/
 .DS_Store
+.venv/
 **/*.quarto_ipynb
-
 /.quarto/

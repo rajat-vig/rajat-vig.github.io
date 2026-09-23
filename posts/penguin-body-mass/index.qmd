@@ -1,0 +1,175 @@
+---
+title: "Penguin Body Mass Across Species"
+author: "Rajat Vig"
+date: "2026-09-23"
+format:
+  html:
+    toc: true
+# jupyter: python3
+jupyter: rajat-vig-m3
+
+---
+
+## Introduction
+
+The Palmer Penguins dataset contains measurements collected from penguins
+observed near Palmer Station in Antarctica. In this analysis, I investigate
+how body mass differs among the three penguin species in the dataset.
+
+The goal is to summarize body mass by species and visualize the differences
+between the groups.
+
+**Data source:** [Palmer Penguins](https://allisonhorst.github.io/palmerpenguins/),
+created by Allison Horst using data from Palmer Station Antarctica LTER.
+
+## Load and inspect the data
+
+The dataset is provided by the `palmerpenguins` Python package, so the
+analysis does not need to download a data file from the internet at render
+time.
+
+```{python}
+#| label: tbl-data-preview
+#| message: false
+#| warning: false
+
+from palmerpenguins import load_penguins
+import pandas as pd
+import matplotlib.pyplot as plt
+import sys
+
+print("Python executable:", sys.executable)
+
+penguins = load_penguins()
+
+penguins.head()
+```
+
+The dataset contains 344 penguin observations and eight variables.
+
+```{python}
+#| label: tbl-data-summary
+
+print(f"Rows: {penguins.shape[0]}")
+print(f"Columns: {penguins.shape[1]}")
+print(f"Species: {penguins['species'].unique().tolist()}")
+```
+
+The three species represented in the dataset are Adelie, Chinstrap, and
+Gentoo.
+
+## Prepare the data
+
+Body mass is recorded in grams. I remove observations with missing body mass
+or species values before calculating the summaries.
+
+```{python}
+#| label: tbl-clean-data
+
+analysis_data = penguins.dropna(
+    subset=["species", "body_mass_g"]
+).copy()
+
+analysis_data["species"] = analysis_data["species"].astype("category")
+
+print("Rows before cleaning:", penguins.shape[0])
+print("Rows after cleaning:", analysis_data.shape[0])
+print(
+    "Missing body-mass values after cleaning:",
+    analysis_data["body_mass_g"].isna().sum()
+)
+
+analysis_data.head()
+```
+
+The cleaned dataset contains the observations needed for comparing body mass
+across species.
+
+## Compare body mass by species
+
+I calculate the number of observations, mean body mass, median body mass,
+and standard deviation for each species.
+
+```{python}
+#| label: tbl-body-mass-summary
+
+summary = (
+    analysis_data
+    .groupby("species", observed=True)["body_mass_g"]
+    .agg(
+        count="count",
+        mean="mean",
+        median="median",
+        std="std"
+    )
+    .round(1)
+)
+
+summary
+```
+
+The summary table gives several measures of typical body mass and variation
+for each species. Comparing the mean and median values provides information
+about the center of each group's distribution.
+
+## Visualize the distributions
+
+The next figure shows the distribution of body mass for each species. The
+horizontal reference line represents the overall mean body mass across the
+cleaned dataset.
+
+```{python}
+#| label: fig-penguin-mass
+#| fig-cap: "Body mass distributions for Palmer Penguins by species."
+
+overall_mean = analysis_data["body_mass_g"].mean()
+
+fig, ax = plt.subplots(figsize=(8, 5))
+
+analysis_data.boxplot(
+    column="body_mass_g",
+    by="species",
+    ax=ax
+)
+
+ax.axhline(
+    overall_mean,
+    color="black",
+    linestyle="--",
+    linewidth=1.5,
+    label=f"Overall mean: {overall_mean:.0f} g"
+)
+
+ax.set_title("Penguin Body Mass by Species")
+ax.set_xlabel("Species")
+ax.set_ylabel("Body mass (g)")
+ax.legend()
+
+plt.suptitle("")
+plt.tight_layout()
+plt.show()
+```
+
+## Findings
+
+The summary statistics and figure show that body mass differs among the
+three penguin species.
+
+The species have different typical body masses, while the boxplots also show
+variation within each species. The mean and median values provide
+complementary summaries of the center of each distribution.
+
+These are descriptive patterns in the Palmer Penguins dataset. This analysis
+does not perform a statistical hypothesis test or attempt to generalize
+beyond the observations represented by these data.
+
+## Conclusion
+
+Using Python, I loaded the Palmer Penguins dataset, inspected its structure,
+removed observations with missing values for the variables of interest,
+calculated species-level body-mass summaries, and created a visualization of
+the distributions.
+
+This provides a reproducible computational workflow in Python because the
+data loading, cleaning, summary calculations, and visualization are all
+performed by code when the Quarto document is rendered.

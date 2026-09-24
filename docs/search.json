@@ -4,7 +4,7 @@
     "href": "blog.html",
     "title": "Blog",
     "section": "",
-    "text": "My first weeks in MDS\n\n\n\n\n\n\n\n\nSep 12, 2026\n\n\nRajat Vig\n\n\n\n\n\nNo matching items"
+    "text": "Penguin Body Mass Across Species\n\n\n\n\n\n\n\n\nSep 23, 2026\n\n\nRajat Vig\n\n\n\n\n\n\n\n\n\n\n\n\nFlipper Length and Body Mass in Penguins\n\n\n\n\n\n\n\n\nSep 23, 2026\n\n\nRajat Vig\n\n\n\n\n\n\n\n\n\n\n\n\nMy first weeks in MDS\n\n\n\n\n\n\n\n\nSep 12, 2026\n\n\nRajat Vig\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
@@ -12,41 +12,6 @@
     "title": "Rajat Vig",
     "section": "",
     "text": "Hi! I’m Rajat Vig, a Master of Data Science in Computational Linguistics student at UBC. Originally from India, I moved to Ontario, where I worked as a Full Stack Developer before starting the MDSCL program. I’m now looking to build on my software development background and explore opportunities in Machine Learning Engineering and AI Research. I’m excited to learn, experiment, and apply data science to solve interesting problems."
-  },
-  {
-    "objectID": "posts/first-weeks/index.html",
-    "href": "posts/first-weeks/index.html",
-    "title": "My first weeks in MDS",
-    "section": "",
-    "text": "Starting the MDSCL program at UBC has been an exciting new chapter for me. Orientation was a great opportunity to meet my classmates, learn more about the program, and get a sense of what the next year will look like. Coming from a software development background, I’m looking forward to bringing my previous experience into this new environment.\nMy first classes have been a mix of challenging and interesting. One thing that surprised me was how quickly we were introduced to new concepts and how much collaboration and hands-on learning is involved. It has been a good reminder that there is always more to learn, even with a background in technology.\nNow that I’ve started settling into the program, I’m feeling excited and motivated about what’s ahead. I’m looking forward to strengthening my skills in data science, machine learning, and computational linguistics while working on interesting projects with my classmates. I’m especially excited to see how the program shapes my path toward ML Engineering and AI Research.\n\n\n\nOrientation day on campus."
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "I grew up in India and later moved to Ontario, Canada. I studied Computer Science and began my career as a Full Stack Developer, where I gained experience building and working on software applications. After working in software development, I decided to pursue the MDSCL program at UBC to expand my skills and explore the intersection of data, language, and technology."
-  },
-  {
-    "objectID": "about.html#background",
-    "href": "about.html#background",
-    "title": "About",
-    "section": "",
-    "text": "I grew up in India and later moved to Ontario, Canada. I studied Computer Science and began my career as a Full Stack Developer, where I gained experience building and working on software applications. After working in software development, I decided to pursue the MDSCL program at UBC to expand my skills and explore the intersection of data, language, and technology."
-  },
-  {
-    "objectID": "about.html#why-data-science",
-    "href": "about.html#why-data-science",
-    "title": "About",
-    "section": "Why Data Science",
-    "text": "Why Data Science\nMy interest in data science comes from wanting to understand how data can be used to answer questions, uncover patterns, and build intelligent solutions. With my background in software development, I was particularly drawn to the combination of programming, problem-solving, and machine learning. I chose to pursue the MDSCL program at UBC as an opportunity to develop these skills and explore a future in Machine Learning Engineering and AI Research."
-  },
-  {
-    "objectID": "about.html#outside-of-data-science",
-    "href": "about.html#outside-of-data-science",
-    "title": "About",
-    "section": "Outside of Data Science",
-    "text": "Outside of Data Science\nOutside of school and work, I enjoy watching movies, gaming, and cooking. I especially enjoy hosting friends and family, whether it’s for a casual game night or a meal I’ve prepared. These activities give me a chance to be creative, relax, and spend time with the people around me."
   },
   {
     "objectID": "posts/penguin-body-mass/index.html",
@@ -67,7 +32,7 @@
     "href": "posts/penguin-body-mass/index.html#load-and-inspect-the-data",
     "title": "Penguin Body Mass Across Species",
     "section": "Load and inspect the data",
-    "text": "Load and inspect the data\nThe dataset is provided by the palmerpenguins Python package, so the analysis does not need to download a data file from the internet at render time.\n\nfrom palmerpenguins import load_penguins\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport sys\n\nprint(\"Python executable:\", sys.executable)\n\npenguins = load_penguins()\n\npenguins.head()\n\nPython executable: /Users/rajatvig/Dropbox/iWork/MDSCL/Block1/DSCI521_Platform/Week2/milestone2/rajat-vig.github.io/.venv/bin/python3\n\n\n\n\nTable 1\n\n\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n0\nAdelie\nTorgersen\n39.1\n18.7\n181.0\n3750.0\nmale\n2007\n\n\n1\nAdelie\nTorgersen\n39.5\n17.4\n186.0\n3800.0\nfemale\n2007\n\n\n2\nAdelie\nTorgersen\n40.3\n18.0\n195.0\n3250.0\nfemale\n2007\n\n\n3\nAdelie\nTorgersen\nNaN\nNaN\nNaN\nNaN\nNaN\n2007\n\n\n4\nAdelie\nTorgersen\n36.7\n19.3\n193.0\n3450.0\nfemale\n2007\n\n\n\n\n\n\n\n\n\n\nThe dataset contains 344 penguin observations and eight variables.\n\n\n\nTable 2\n\n\nprint(f\"Rows: {penguins.shape[0]}\")\nprint(f\"Columns: {penguins.shape[1]}\")\nprint(f\"Species: {penguins['species'].unique().tolist()}\")\n\nRows: 344\nColumns: 8\nSpecies: ['Adelie', 'Gentoo', 'Chinstrap']\n\n\n\n\nThe three species represented in the dataset are Adelie, Chinstrap, and Gentoo."
+    "text": "Load and inspect the data\nThe dataset is provided by the palmerpenguins Python package, so the analysis does not need to download a data file from the internet at render time.\n\nfrom palmerpenguins import load_penguins\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\npenguins = load_penguins()\n\npenguins.head()\n\n\n\nTable 1\n\n\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n0\nAdelie\nTorgersen\n39.1\n18.7\n181.0\n3750.0\nmale\n2007\n\n\n1\nAdelie\nTorgersen\n39.5\n17.4\n186.0\n3800.0\nfemale\n2007\n\n\n2\nAdelie\nTorgersen\n40.3\n18.0\n195.0\n3250.0\nfemale\n2007\n\n\n3\nAdelie\nTorgersen\nNaN\nNaN\nNaN\nNaN\nNaN\n2007\n\n\n4\nAdelie\nTorgersen\n36.7\n19.3\n193.0\n3450.0\nfemale\n2007\n\n\n\n\n\n\n\n\n\n\nThe dataset contains 344 penguin observations and eight variables.\n\n\n\nTable 2\n\n\nprint(f\"Rows: {penguins.shape[0]}\")\nprint(f\"Columns: {penguins.shape[1]}\")\nprint(f\"Species: {penguins['species'].unique().tolist()}\")\n\nRows: 344\nColumns: 8\nSpecies: ['Adelie', 'Gentoo', 'Chinstrap']\n\n\n\n\nThe three species represented in the dataset are Adelie, Chinstrap, and Gentoo."
   },
   {
     "objectID": "posts/penguin-body-mass/index.html#prepare-the-data",
@@ -103,6 +68,13 @@
     "title": "Penguin Body Mass Across Species",
     "section": "Conclusion",
     "text": "Conclusion\nUsing Python, I loaded the Palmer Penguins dataset, inspected its structure, removed observations with missing values for the variables of interest, calculated species-level body-mass summaries, and created a visualization of the distributions.\nThis provides a reproducible computational workflow in Python because the data loading, cleaning, summary calculations, and visualization are all performed by code when the Quarto document is rendered."
+  },
+  {
+    "objectID": "posts/first-weeks/index.html",
+    "href": "posts/first-weeks/index.html",
+    "title": "My first weeks in MDS",
+    "section": "",
+    "text": "Starting the MDSCL program at UBC has been an exciting new chapter for me. Orientation was a great opportunity to meet my classmates, learn more about the program, and get a sense of what the next year will look like. Coming from a software development background, I’m looking forward to bringing my previous experience into this new environment.\nMy first classes have been a mix of challenging and interesting. One thing that surprised me was how quickly we were introduced to new concepts and how much collaboration and hands-on learning is involved. It has been a good reminder that there is always more to learn, even with a background in technology.\nNow that I’ve started settling into the program, I’m feeling excited and motivated about what’s ahead. I’m looking forward to strengthening my skills in data science, machine learning, and computational linguistics while working on interesting projects with my classmates. I’m especially excited to see how the program shapes my path toward ML Engineering and AI Research.\n\n\n\nOrientation day on campus."
   },
   {
     "objectID": "posts/flipper-body-mass/index.html",
@@ -159,5 +131,33 @@
     "title": "Flipper Length and Body Mass in Penguins",
     "section": "Conclusion",
     "text": "Conclusion\nUsing R, I loaded the Palmer Penguins dataset, inspected its structure, removed observations with missing values for the variables of interest, calculated species-level summaries and correlations, and created a visualization of the relationship between flipper length and body mass.\nThe analysis demonstrates a reproducible R workflow because the data processing, calculations, and figure are generated from code when the Quarto document is rendered."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "I grew up in India and later moved to Ontario, Canada. I studied Computer Science and began my career as a Full Stack Developer, where I gained experience building and working on software applications. After working in software development, I decided to pursue the MDSCL program at UBC to expand my skills and explore the intersection of data, language, and technology."
+  },
+  {
+    "objectID": "about.html#background",
+    "href": "about.html#background",
+    "title": "About",
+    "section": "",
+    "text": "I grew up in India and later moved to Ontario, Canada. I studied Computer Science and began my career as a Full Stack Developer, where I gained experience building and working on software applications. After working in software development, I decided to pursue the MDSCL program at UBC to expand my skills and explore the intersection of data, language, and technology."
+  },
+  {
+    "objectID": "about.html#why-data-science",
+    "href": "about.html#why-data-science",
+    "title": "About",
+    "section": "Why Data Science",
+    "text": "Why Data Science\nMy interest in data science comes from wanting to understand how data can be used to answer questions, uncover patterns, and build intelligent solutions. With my background in software development, I was particularly drawn to the combination of programming, problem-solving, and machine learning. I chose to pursue the MDSCL program at UBC as an opportunity to develop these skills and explore a future in Machine Learning Engineering and AI Research."
+  },
+  {
+    "objectID": "about.html#outside-of-data-science",
+    "href": "about.html#outside-of-data-science",
+    "title": "About",
+    "section": "Outside of Data Science",
+    "text": "Outside of Data Science\nOutside of school and work, I enjoy watching movies, gaming, and cooking. I especially enjoy hosting friends and family, whether it’s for a casual game night or a meal I’ve prepared. These activities give me a chance to be creative, relax, and spend time with the people around me."
   }
 ]

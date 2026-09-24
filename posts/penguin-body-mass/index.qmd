@@ -5,8 +5,7 @@ date: "2026-09-23"
 format:
   html:
     toc: true
-# jupyter: python3
-jupyter: rajat-vig-m3
+jupyter: python3
 
 ---
 
@@ -36,9 +35,6 @@ time.
 from palmerpenguins import load_penguins
 import pandas as pd
 import matplotlib.pyplot as plt
-import sys
-
-print("Python executable:", sys.executable)
 
 penguins = load_penguins()
 

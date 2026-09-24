@@ -118,3 +118,10 @@ No external data download is required during rendering.
 - `.Rprofile` — renv project activation
 - `renv/` — R environment configuration
 - `.gitignore` — files excluded from Git
+
+## Reproducibility check
+
+The build instructions were tested from a fresh clone of this repository.
+The Python environment was recreated with `uv sync`, the R environment was
+restored with `renv::restore()`, and the complete website was successfully
+rendered with `uv run quarto render`.

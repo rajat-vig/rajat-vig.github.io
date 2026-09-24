@@ -14,7 +14,10 @@ The Palmer Penguins dataset contains measurements collected from penguins observ
 
 The R code prepares the data and calculates species-level summaries. The Python code receives data from R, performs an additional calculation, and returns the result to R.
 
-**Data source:** [Palmer Penguins](https://allisonhorst.github.io/palmerpenguins/), created by Allison Horst using data from Palmer Station Antarctica LTER.
+**Data source:** [Palmer Penguins](https://allisonhorst.github.io/palmerpenguins/),
+collected by Dr. Kristen Gorman at Palmer Station Antarctica LTER. Licence: CC0 1.0.
+Citation: Horst AM, Hill AP, Gorman KB (2020). *palmerpenguins: Palmer Archipelago
+(Antarctica) penguin data.* [doi:10.5281/zenodo.3960218](https://doi.org/10.5281/zenodo.3960218).
 
 The dataset is distributed with the `palmerpenguins` package, so the analysis does not need to download a data file from the internet during rendering.
 

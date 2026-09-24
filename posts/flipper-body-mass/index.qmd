@@ -18,7 +18,9 @@ The goal is to summarize the measurements by species and visualize the
 relationship between flipper length and body mass.
 
 **Data source:** [Palmer Penguins](https://allisonhorst.github.io/palmerpenguins/),
-created by Allison Horst using data from Palmer Station Antarctica LTER.
+collected by Dr. Kristen Gorman at Palmer Station Antarctica LTER. Licence: CC0 1.0.
+Citation: Horst AM, Hill AP, Gorman KB (2020). *palmerpenguins: Palmer Archipelago
+(Antarctica) penguin data.* [doi:10.5281/zenodo.3960218](https://doi.org/10.5281/zenodo.3960218).
 
 ## Load and inspect the data
 

@@ -4,7 +4,7 @@
     "href": "blog.html",
     "title": "Blog",
     "section": "",
-    "text": "Penguin Body Mass Across Species\n\n\n\n\n\n\n\n\nSep 23, 2026\n\n\nRajat Vig\n\n\n\n\n\n\n\n\n\n\n\n\nFlipper Length and Body Mass in Penguins\n\n\n\n\n\n\n\n\nSep 23, 2026\n\n\nRajat Vig\n\n\n\n\n\n\n\n\n\n\n\n\nMy first weeks in MDS\n\n\n\n\n\n\n\n\nSep 12, 2026\n\n\nRajat Vig\n\n\n\n\n\nNo matching items"
+    "text": "Penguin Body Mass Across Species\n\n\n\n\n\n\n\n\nSep 23, 2026\n\n\nRajat Vig\n\n\n\n\n\n\n\n\n\n\n\n\nR and Python Analysis of Penguin Body Mass\n\n\n\n\n\n\n\n\nSep 23, 2026\n\n\nRajat Vig\n\n\n\n\n\n\n\n\n\n\n\n\nFlipper Length and Body Mass in Penguins\n\n\n\n\n\n\n\n\nSep 23, 2026\n\n\nRajat Vig\n\n\n\n\n\n\n\n\n\n\n\n\nMy first weeks in MDS\n\n\n\n\n\n\n\n\nSep 12, 2026\n\n\nRajat Vig\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
@@ -12,6 +12,76 @@
     "title": "Rajat Vig",
     "section": "",
     "text": "Hi! I’m Rajat Vig, a Master of Data Science in Computational Linguistics student at UBC. Originally from India, I moved to Ontario, where I worked as a Full Stack Developer before starting the MDSCL program. I’m now looking to build on my software development background and explore opportunities in Machine Learning Engineering and AI Research. I’m excited to learn, experiment, and apply data science to solve interesting problems."
+  },
+  {
+    "objectID": "posts/r-and-python/index.html",
+    "href": "posts/r-and-python/index.html",
+    "title": "R and Python Analysis of Penguin Body Mass",
+    "section": "",
+    "text": "The Palmer Penguins dataset contains measurements collected from penguins observed near Palmer Station in Antarctica. In this analysis, I use both R and Python in the same Quarto document.\nThe R code prepares the data and calculates species-level summaries. The Python code receives data from R, performs an additional calculation, and returns the result to R.\nData source: Palmer Penguins, created by Allison Horst using data from Palmer Station Antarctica LTER.\nThe dataset is distributed with the palmerpenguins package, so the analysis does not need to download a data file from the internet during rendering."
+  },
+  {
+    "objectID": "posts/r-and-python/index.html#introduction",
+    "href": "posts/r-and-python/index.html#introduction",
+    "title": "R and Python Analysis of Penguin Body Mass",
+    "section": "",
+    "text": "The Palmer Penguins dataset contains measurements collected from penguins observed near Palmer Station in Antarctica. In this analysis, I use both R and Python in the same Quarto document.\nThe R code prepares the data and calculates species-level summaries. The Python code receives data from R, performs an additional calculation, and returns the result to R.\nData source: Palmer Penguins, created by Allison Horst using data from Palmer Station Antarctica LTER.\nThe dataset is distributed with the palmerpenguins package, so the analysis does not need to download a data file from the internet during rendering."
+  },
+  {
+    "objectID": "posts/r-and-python/index.html#load-and-prepare-the-data-in-r",
+    "href": "posts/r-and-python/index.html#load-and-prepare-the-data-in-r",
+    "title": "R and Python Analysis of Penguin Body Mass",
+    "section": "Load and prepare the data in R",
+    "text": "Load and prepare the data in R\nFirst, I load the Palmer Penguins data in R and remove observations that are missing body mass or species.\n\n\n\nTable 1\n\n\nlibrary(palmerpenguins)\nlibrary(dplyr)\nlibrary(reticulate)\n\nanalysis_data &lt;- penguins %&gt;%\n  filter(\n    !is.na(species),\n    !is.na(body_mass_g)\n  )\n\ncat(\"Rows after cleaning:\", nrow(analysis_data), \"\\n\")\n\nRows after cleaning: 342 \n\nhead(analysis_data)\n\n# A tibble: 6 × 8\n  species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g\n  &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;\n1 Adelie  Torgersen           39.1          18.7               181        3750\n2 Adelie  Torgersen           39.5          17.4               186        3800\n3 Adelie  Torgersen           40.3          18                 195        3250\n4 Adelie  Torgersen           36.7          19.3               193        3450\n5 Adelie  Torgersen           39.3          20.6               190        3650\n6 Adelie  Torgersen           38.9          17.8               181        3625\n# ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;\n\n\n\n\nThe cleaned dataset contains the observations needed for the analysis."
+  },
+  {
+    "objectID": "posts/r-and-python/index.html#calculate-species-means-in-r",
+    "href": "posts/r-and-python/index.html#calculate-species-means-in-r",
+    "title": "R and Python Analysis of Penguin Body Mass",
+    "section": "Calculate species means in R",
+    "text": "Calculate species means in R\nI calculate the mean body mass for each penguin species.\n\n\n\nTable 2\n\n\nr_summary &lt;- analysis_data %&gt;%\n  group_by(species) %&gt;%\n  summarise(\n    observations = n(),\n    mean_body_mass_g = mean(body_mass_g),\n    .groups = \"drop\"\n  ) %&gt;%\n  mutate(\n    mean_body_mass_g = round(mean_body_mass_g, 1)\n  )\n\nr_summary\n\n# A tibble: 3 × 3\n  species   observations mean_body_mass_g\n  &lt;fct&gt;            &lt;int&gt;            &lt;dbl&gt;\n1 Adelie             151            3701.\n2 Chinstrap           68            3733.\n3 Gentoo             123            5076 \n\n\n\n\nThe R calculation produces a species-level summary that will be passed to Python."
+  },
+  {
+    "objectID": "posts/r-and-python/index.html#pass-the-r-result-to-python",
+    "href": "posts/r-and-python/index.html#pass-the-r-result-to-python",
+    "title": "R and Python Analysis of Penguin Body Mass",
+    "section": "Pass the R result to Python",
+    "text": "Pass the R result to Python\nThe reticulate package allows R and Python to communicate within the same Quarto document.\nI pass the cleaned R data to Python as a pandas DataFrame. Python then calculates the overall mean body mass.\n\n\n\nTable 3\n\n\nimport pandas as pd\n\npython_data = r.analysis_data\n\noverall_mean = python_data[\"body_mass_g\"].mean()\n\nprint(\"Python received\", len(python_data), \"observations\")\n\nPython received 342 observations\n\nprint(f\"Overall mean body mass: {overall_mean:.1f} g\")\n\nOverall mean body mass: 4201.8 g\n\n\n\n\nThe Python code receives the object created in R and calculates a new result from it."
+  },
+  {
+    "objectID": "posts/r-and-python/index.html#pass-the-python-result-back-to-r",
+    "href": "posts/r-and-python/index.html#pass-the-python-result-back-to-r",
+    "title": "R and Python Analysis of Penguin Body Mass",
+    "section": "Pass the Python result back to R",
+    "text": "Pass the Python result back to R\nThe Python result can also be accessed from R.\n\n\n\nTable 4\n\n\npython_mean &lt;- py$overall_mean\n\ncat(\n  \"Overall mean body mass calculated by Python:\",\n  round(python_mean, 1),\n  \"g\\n\"\n)\n\nOverall mean body mass calculated by Python: 4201.8 g\n\n\n\n\nThis demonstrates the two-way workflow: R creates the data object, Python uses that object to calculate a result, and R reads the Python result."
+  },
+  {
+    "objectID": "posts/r-and-python/index.html#visualize-the-data-in-python",
+    "href": "posts/r-and-python/index.html#visualize-the-data-in-python",
+    "title": "R and Python Analysis of Penguin Body Mass",
+    "section": "Visualize the data in Python",
+    "text": "Visualize the data in Python\nFinally, I use the Python DataFrame to create a figure showing body mass by species.\n\nimport matplotlib.pyplot as plt\n\nfig, ax = plt.subplots(figsize=(8, 5))\n\npython_data.boxplot(\n    column=\"body_mass_g\",\n    by=\"species\",\n    ax=ax\n)\n\nax.axhline(\n    overall_mean,\n    color=\"black\",\n    linestyle=\"--\",\n    linewidth=1.5,\n    label=f\"Overall mean: {overall_mean:.0f} g\"\n)\n\nax.set_title(\"Penguin Body Mass by Species\")\nax.set_xlabel(\"Species\")\nax.set_ylabel(\"Body mass (g)\")\nax.legend()\n\nplt.suptitle(\"\")\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\nFigure 1: Penguin body mass by species, using data prepared in R and visualized in Python."
+  },
+  {
+    "objectID": "posts/r-and-python/index.html#findings",
+    "href": "posts/r-and-python/index.html#findings",
+    "title": "R and Python Analysis of Penguin Body Mass",
+    "section": "Findings",
+    "text": "Findings\nThe analysis demonstrates how R and Python can be used together in one Quarto document.\nR was used to load and clean the Palmer Penguins data and calculate species-level summaries. The cleaned R data were then passed to Python, where the overall mean body mass was calculated.\nThe Python result was subsequently accessed from R, demonstrating that objects can be passed between the two languages through reticulate.\nThe figure shows differences in body mass among the three penguin species, along with the overall mean body mass across the cleaned observations.\nThese are descriptive results from the Palmer Penguins dataset and do not establish causal relationships."
+  },
+  {
+    "objectID": "posts/r-and-python/index.html#conclusion",
+    "href": "posts/r-and-python/index.html#conclusion",
+    "title": "R and Python Analysis of Penguin Body Mass",
+    "section": "Conclusion",
+    "text": "Conclusion\nThis post demonstrates a reproducible mixed-language workflow using R, Python, Quarto, and reticulate. The same computational document contains R and Python code, passes an object from R to Python, performs a calculation in Python, and passes the resulting value back to R.\nBecause all calculations and the figure are generated during rendering, the analysis can be reproduced from the project environment rather than relying on manually created outputs."
+  },
+  {
+    "objectID": "posts/first-weeks/index.html",
+    "href": "posts/first-weeks/index.html",
+    "title": "My first weeks in MDS",
+    "section": "",
+    "text": "Starting the MDSCL program at UBC has been an exciting new chapter for me. Orientation was a great opportunity to meet my classmates, learn more about the program, and get a sense of what the next year will look like. Coming from a software development background, I’m looking forward to bringing my previous experience into this new environment.\nMy first classes have been a mix of challenging and interesting. One thing that surprised me was how quickly we were introduced to new concepts and how much collaboration and hands-on learning is involved. It has been a good reminder that there is always more to learn, even with a background in technology.\nNow that I’ve started settling into the program, I’m feeling excited and motivated about what’s ahead. I’m looking forward to strengthening my skills in data science, machine learning, and computational linguistics while working on interesting projects with my classmates. I’m especially excited to see how the program shapes my path toward ML Engineering and AI Research.\n\n\n\nOrientation day on campus."
   },
   {
     "objectID": "posts/penguin-body-mass/index.html",
@@ -68,13 +138,6 @@
     "title": "Penguin Body Mass Across Species",
     "section": "Conclusion",
     "text": "Conclusion\nUsing Python, I loaded the Palmer Penguins dataset, inspected its structure, removed observations with missing values for the variables of interest, calculated species-level body-mass summaries, and created a visualization of the distributions.\nThis provides a reproducible computational workflow in Python because the data loading, cleaning, summary calculations, and visualization are all performed by code when the Quarto document is rendered."
-  },
-  {
-    "objectID": "posts/first-weeks/index.html",
-    "href": "posts/first-weeks/index.html",
-    "title": "My first weeks in MDS",
-    "section": "",
-    "text": "Starting the MDSCL program at UBC has been an exciting new chapter for me. Orientation was a great opportunity to meet my classmates, learn more about the program, and get a sense of what the next year will look like. Coming from a software development background, I’m looking forward to bringing my previous experience into this new environment.\nMy first classes have been a mix of challenging and interesting. One thing that surprised me was how quickly we were introduced to new concepts and how much collaboration and hands-on learning is involved. It has been a good reminder that there is always more to learn, even with a background in technology.\nNow that I’ve started settling into the program, I’m feeling excited and motivated about what’s ahead. I’m looking forward to strengthening my skills in data science, machine learning, and computational linguistics while working on interesting projects with my classmates. I’m especially excited to see how the program shapes my path toward ML Engineering and AI Research.\n\n\n\nOrientation day on campus."
   },
   {
     "objectID": "posts/flipper-body-mass/index.html",

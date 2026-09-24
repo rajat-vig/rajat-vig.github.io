@@ -1,0 +1,161 @@
+---
+title: "R and Python Analysis of Penguin Body Mass"
+author: "Rajat Vig"
+date: "2026-09-23"
+format:
+  html:
+    toc: true
+engine: knitr
+---
+
+## Introduction
+
+The Palmer Penguins dataset contains measurements collected from penguins observed near Palmer Station in Antarctica. In this analysis, I use both R and Python in the same Quarto document.
+
+The R code prepares the data and calculates species-level summaries. The Python code receives data from R, performs an additional calculation, and returns the result to R.
+
+**Data source:** [Palmer Penguins](https://allisonhorst.github.io/palmerpenguins/), created by Allison Horst using data from Palmer Station Antarctica LTER.
+
+The dataset is distributed with the `palmerpenguins` package, so the analysis does not need to download a data file from the internet during rendering.
+
+## Load and prepare the data in R
+
+First, I load the Palmer Penguins data in R and remove observations that are missing body mass or species.
+
+```{r}
+#| label: tbl-r-data
+#| message: false
+#| warning: false
+
+library(palmerpenguins)
+library(dplyr)
+library(reticulate)
+
+analysis_data <- penguins %>%
+  filter(
+    !is.na(species),
+    !is.na(body_mass_g)
+  )
+
+cat("Rows after cleaning:", nrow(analysis_data), "\n")
+
+head(analysis_data)
+```
+
+The cleaned dataset contains the observations needed for the analysis.
+
+## Calculate species means in R
+
+I calculate the mean body mass for each penguin species.
+
+```{r}
+#| label: tbl-r-summary
+
+r_summary <- analysis_data %>%
+  group_by(species) %>%
+  summarise(
+    observations = n(),
+    mean_body_mass_g = mean(body_mass_g),
+    .groups = "drop"
+  ) %>%
+  mutate(
+    mean_body_mass_g = round(mean_body_mass_g, 1)
+  )
+
+r_summary
+```
+
+The R calculation produces a species-level summary that will be passed to Python.
+
+## Pass the R result to Python
+
+The `reticulate` package allows R and Python to communicate within the same Quarto document.
+
+I pass the cleaned R data to Python as a pandas DataFrame. Python then calculates the overall mean body mass.
+
+```{python}
+#| label: tbl-python-summary
+
+import pandas as pd
+
+python_data = r.analysis_data
+
+overall_mean = python_data["body_mass_g"].mean()
+
+print("Python received", len(python_data), "observations")
+print(f"Overall mean body mass: {overall_mean:.1f} g")
+```
+
+The Python code receives the object created in R and calculates a new result from it.
+
+## Pass the Python result back to R
+
+The Python result can also be accessed from R.
+
+```{r}
+#| label: tbl-r-python-result
+
+python_mean <- py$overall_mean
+
+cat(
+  "Overall mean body mass calculated by Python:",
+  round(python_mean, 1),
+  "g\n"
+)
+```
+
+This demonstrates the two-way workflow: R creates the data object, Python uses that object to calculate a result, and R reads the Python result.
+
+## Visualize the data in Python
+
+Finally, I use the Python DataFrame to create a figure showing body mass by species.
+
+```{python}
+#| label: fig-r-python-penguins
+#| fig-cap: "Penguin body mass by species, using data prepared in R and visualized in Python."
+
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots(figsize=(8, 5))
+
+python_data.boxplot(
+    column="body_mass_g",
+    by="species",
+    ax=ax
+)
+
+ax.axhline(
+    overall_mean,
+    color="black",
+    linestyle="--",
+    linewidth=1.5,
+    label=f"Overall mean: {overall_mean:.0f} g"
+)
+
+ax.set_title("Penguin Body Mass by Species")
+ax.set_xlabel("Species")
+ax.set_ylabel("Body mass (g)")
+ax.legend()
+
+plt.suptitle("")
+plt.tight_layout()
+plt.show()
+```
+
+## Findings
+
+The analysis demonstrates how R and Python can be used together in one Quarto document.
+
+R was used to load and clean the Palmer Penguins data and calculate species-level summaries. The cleaned R data were then passed to Python, where the overall mean body mass was calculated.
+
+The Python result was subsequently accessed from R, demonstrating that objects can be passed between the two languages through `reticulate`.
+
+The figure shows differences in body mass among the three penguin species, along with the overall mean body mass across the cleaned observations.
+
+These are descriptive results from the Palmer Penguins dataset and do not establish causal relationships.
+
+## Conclusion
+
+This post demonstrates a reproducible mixed-language workflow using R, Python, Quarto, and `reticulate`. The same computational document contains R and Python code, passes an object from R to Python, performs a calculation in Python, and passes the resulting value back to R.
+
+Because all calculations and the figure are generated during rendering, the analysis can be reproduced from the project environment rather than relying on manually created outputs.

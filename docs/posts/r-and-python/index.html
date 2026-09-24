@@ -215,12 +215,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="load-and-prepare-the-data-in-r" class="level2">
 <h2 class="anchored" data-anchor-id="load-and-prepare-the-data-in-r">Load and prepare the data in R</h2>
 <p>First, I load the Palmer Penguins data in R and remove observations that are missing body mass or species.</p>
-<div id="tbl-r-data" class="cell quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl quarto-uncaptioned" id="tbl-r-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;1
-</figcaption>
-<div aria-describedby="tbl-r-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reticulate)</span>
@@ -249,19 +244,12 @@ Table&nbsp;1
 # ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
 </div>
 </div>
-</figure>
-</div>
 <p>The cleaned dataset contains the observations needed for the analysis.</p>
 </section>
 <section id="calculate-species-means-in-r" class="level2">
 <h2 class="anchored" data-anchor-id="calculate-species-means-in-r">Calculate species means in R</h2>
 <p>I calculate the mean body mass for each penguin species.</p>
-<div id="tbl-r-summary" class="cell quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl quarto-uncaptioned" id="tbl-r-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;2
-</figcaption>
-<div aria-describedby="tbl-r-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>r_summary <span class="ot">&lt;-</span> analysis_data <span class="sc">%&gt;%</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
@@ -283,25 +271,18 @@ Table&nbsp;2
 3 Gentoo             123            5076 </code></pre>
 </div>
 </div>
-</figure>
-</div>
 <p>The R calculation produces a species-level summary that will be passed to Python.</p>
 </section>
 <section id="pass-the-r-result-to-python" class="level2">
 <h2 class="anchored" data-anchor-id="pass-the-r-result-to-python">Pass the R result to Python</h2>
 <p>The <code>reticulate</code> package allows R and Python to communicate within the same Quarto document.</p>
 <p>I pass the cleaned R data to Python as a pandas DataFrame. Python then calculates the overall mean body mass.</p>
-<div id="tbl-python-summary" class="cell quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl quarto-uncaptioned" id="tbl-python-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;3
-</figcaption>
-<div aria-describedby="tbl-python-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>python_data <span class="op">=</span> r.analysis_data</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>overall_mean <span class="op">=</span> python_data[<span class="st">"body_mass_g"</span>].mean()</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>overall_mean <span class="op">=</span> <span class="bu">float</span>(python_data[<span class="st">"body_mass_g"</span>].mean())</span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Python received"</span>, <span class="bu">len</span>(python_data), <span class="st">"observations"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -312,19 +293,12 @@ Table&nbsp;3
 <pre><code>Overall mean body mass: 4201.8 g</code></pre>
 </div>
 </div>
-</figure>
-</div>
 <p>The Python code receives the object created in R and calculates a new result from it.</p>
 </section>
 <section id="pass-the-python-result-back-to-r" class="level2">
 <h2 class="anchored" data-anchor-id="pass-the-python-result-back-to-r">Pass the Python result back to R</h2>
 <p>The Python result can also be accessed from R.</p>
-<div id="tbl-r-python-result" class="cell quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl quarto-uncaptioned" id="tbl-r-python-result-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;4
-</figcaption>
-<div aria-describedby="tbl-r-python-result-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>python_mean <span class="ot">&lt;-</span> py<span class="sc">$</span>overall_mean</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(</span>
@@ -335,8 +309,6 @@ Table&nbsp;4
 <div class="cell-output cell-output-stdout">
 <pre><code>Overall mean body mass calculated by Python: 4201.8 g</code></pre>
 </div>
-</div>
-</figure>
 </div>
 <p>This demonstrates the two-way workflow: R creates the data object, Python uses that object to calculate a result, and R reads the Python result.</p>
 </section>

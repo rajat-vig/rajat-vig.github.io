@@ -1,7 +1,7 @@
 ---
 title: "Penguin Body Mass Across Species"
 author: "Rajat Vig"
-date: "2026-09-23"
+date: "2026-09-21"
 format:
   html:
     toc: true
@@ -19,7 +19,9 @@ The goal is to summarize body mass by species and visualize the differences
 between the groups.
 
 **Data source:** [Palmer Penguins](https://allisonhorst.github.io/palmerpenguins/),
-created by Allison Horst using data from Palmer Station Antarctica LTER.
+collected by Dr. Kristen Gorman at Palmer Station Antarctica LTER. Licence: CC0 1.0.
+Citation: Horst AM, Hill AP, Gorman KB (2020). *palmerpenguins: Palmer Archipelago
+(Antarctica) penguin data.* [doi:10.5281/zenodo.3960218](https://doi.org/10.5281/zenodo.3960218).
 
 ## Load and inspect the data
 
@@ -28,8 +30,7 @@ analysis does not need to download a data file from the internet at render
 time.
 
 ```{python}
-#| label: tbl-data-preview
-#| message: false
+#| label: data-preview
 #| warning: false
 
 from palmerpenguins import load_penguins
@@ -44,7 +45,7 @@ penguins.head()
 The dataset contains 344 penguin observations and eight variables.
 
 ```{python}
-#| label: tbl-data-summary
+#| label: data-summary
 
 print(f"Rows: {penguins.shape[0]}")
 print(f"Columns: {penguins.shape[1]}")
@@ -60,7 +61,7 @@ Body mass is recorded in grams. I remove observations with missing body mass
 or species values before calculating the summaries.
 
 ```{python}
-#| label: tbl-clean-data
+#| label: clean-data
 
 analysis_data = penguins.dropna(
     subset=["species", "body_mass_g"]
@@ -88,6 +89,7 @@ and standard deviation for each species.
 
 ```{python}
 #| label: tbl-body-mass-summary
+#| tbl-cap: "Body mass (g) by species: count, mean, median and standard deviation."
 
 summary = (
     analysis_data
@@ -151,9 +153,11 @@ plt.show()
 The summary statistics and figure show that body mass differs among the
 three penguin species.
 
-The species have different typical body masses, while the boxplots also show
-variation within each species. The mean and median values provide
-complementary summaries of the center of each distribution.
+Gentoo penguins are much heavier than the other two species, averaging about
+5,076 g, while Adelie (about 3,701 g) and Chinstrap (about 3,733 g) penguins
+have very similar average body masses (@tbl-body-mass-summary). The boxplots in
+@fig-penguin-mass show the same pattern, and also that the Adelie and Chinstrap
+distributions overlap almost completely.
 
 These are descriptive patterns in the Palmer Penguins dataset. This analysis
 does not perform a statistical hypothesis test or attempt to generalize

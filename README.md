@@ -65,6 +65,7 @@ Individual computational posts can also be rendered with:
 
     uv run quarto render posts/penguin-body-mass/index.qmd
     uv run quarto render posts/flipper-body-mass/index.qmd
+    uv run quarto render posts/r-and-python/index.qmd
 
 ## Reproducibility
 

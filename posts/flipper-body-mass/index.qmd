@@ -1,7 +1,7 @@
 ---
 title: "Flipper Length and Body Mass in Penguins"
 author: "Rajat Vig"
-date: "2026-09-23"
+date: "2026-09-22"
 format:
   html:
     toc: true
@@ -26,7 +26,7 @@ The dataset is provided by the `palmerpenguins` R package, so the analysis
 does not require downloading a data file from the internet at render time.
 
 ```{r}
-#| label: tbl-data-preview
+#| label: data-preview
 #| message: false
 #| warning: false
 
@@ -50,7 +50,7 @@ For this analysis, I need observations with both flipper length and body
 mass available. I remove observations missing either measurement.
 
 ```{r}
-#| label: tbl-clean-data
+#| label: clean-data
 
 analysis_data <- penguins_data %>%
   filter(
@@ -80,6 +80,7 @@ and the correlation between the two measurements for each species.
 
 ```{r}
 #| label: tbl-species-summary
+#| tbl-cap: "Flipper length, body mass and their correlation by species."
 
 species_summary <- analysis_data %>%
   group_by(species) %>%
@@ -97,7 +98,7 @@ species_summary <- analysis_data %>%
     )
   )
 
-species_summary
+knitr::kable(species_summary)
 ```
 
 The summary provides information about typical flipper length, typical body
@@ -123,8 +124,9 @@ ggplot(
   )
 ) +
   geom_point(alpha = 0.7) +
-  geom_smooth(
+    geom_smooth(
     method = "lm",
+    formula = y ~ x,
     se = FALSE
   ) +
   labs(
@@ -136,15 +138,22 @@ ggplot(
   theme_minimal()
 ```
 
+```{r}
+#| label: overall-correlation
+round(cor(analysis_data$flipper_length_mm, analysis_data$body_mass_g), 2)
+```
+
 ## Findings
 
 The summary statistics and figure show a positive relationship between
 flipper length and body mass in the Palmer Penguins data. Penguins with
 longer flippers generally have greater body mass.
 
-The relationship can also be examined separately by species. The species
-summary provides a correlation for each group, while the fitted lines in the
-figure show the direction of the relationship visually.
+Across all penguins the correlation between flipper length and body mass is
+strong (about 0.87), but part of that comes from Gentoos being larger on both
+measures. Within each species the relationship is still positive but weaker:
+about 0.47 for Adelie, 0.64 for Chinstrap and 0.70 for Gentoo
+(@tbl-species-summary, @fig-flipper-body-mass).
 
 These results are descriptive and summarize the observations in this
 dataset. They do not establish that flipper length causes differences in

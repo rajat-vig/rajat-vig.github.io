@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Rajat Vig">
-<meta name="dcterms.date" content="2026-09-23">
+<meta name="dcterms.date" content="2026-09-21">
 
 <title>Penguin Body Mass Across Species – Rajat Vig</title>
 <style>
@@ -195,7 +195,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 23, 2026</p>
+      <p class="date">September 21, 2026</p>
     </div>
   </div>
   
@@ -211,12 +211,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>The Palmer Penguins dataset contains measurements collected from penguins observed near Palmer Station in Antarctica. In this analysis, I investigate how body mass differs among the three penguin species in the dataset.</p>
 <p>The goal is to summarize body mass by species and visualize the differences between the groups.</p>
-<p><strong>Data source:</strong> <a href="https://allisonhorst.github.io/palmerpenguins/">Palmer Penguins</a>, created by Allison Horst using data from Palmer Station Antarctica LTER.</p>
+<p><strong>Data source:</strong> <a href="https://allisonhorst.github.io/palmerpenguins/">Palmer Penguins</a>, collected by Dr.&nbsp;Kristen Gorman at Palmer Station Antarctica LTER. Licence: CC0 1.0. Citation: Horst AM, Hill AP, Gorman KB (2020). <em>palmerpenguins: Palmer Archipelago (Antarctica) penguin data.</em> <a href="https://doi.org/10.5281/zenodo.3960218">doi:10.5281/zenodo.3960218</a>.</p>
 </section>
 <section id="load-and-inspect-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="load-and-inspect-the-data">Load and inspect the data</h2>
 <p>The dataset is provided by the <code>palmerpenguins</code> Python package, so the analysis does not need to download a data file from the internet at render time.</p>
-<div class="cell" data-message="false" data-execution_count="1">
+<div id="cell-data-preview" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> palmerpenguins <span class="im">import</span> load_penguins</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -224,13 +224,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> load_penguins()</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>penguins.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div id="tbl-data-preview" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="1" data-message="false">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl quarto-uncaptioned" id="tbl-data-preview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;1
-</figcaption>
-<div aria-describedby="tbl-data-preview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="cell-output cell-output-display" data-execution_count="1">
+<div id="data-preview" class="cell-output cell-output-display" data-execution_count="1">
 <div>
 
 
@@ -310,16 +304,8 @@ Table&nbsp;1
 </div>
 </div>
 </div>
-</figure>
-</div>
-</div>
 <p>The dataset contains 344 penguin observations and eight variables.</p>
-<div id="tbl-data-summary" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="2">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl quarto-uncaptioned" id="tbl-data-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;2
-</figcaption>
-<div aria-describedby="tbl-data-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div id="data-summary" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Rows: </span><span class="sc">{</span>penguins<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Columns: </span><span class="sc">{</span>penguins<span class="sc">.</span>shape[<span class="dv">1</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Species: </span><span class="sc">{</span>penguins[<span class="st">'species'</span>]<span class="sc">.</span>unique()<span class="sc">.</span>tolist()<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -329,14 +315,12 @@ Columns: 8
 Species: ['Adelie', 'Gentoo', 'Chinstrap']</code></pre>
 </div>
 </div>
-</figure>
-</div>
 <p>The three species represented in the dataset are Adelie, Chinstrap, and Gentoo.</p>
 </section>
 <section id="prepare-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="prepare-the-data">Prepare the data</h2>
 <p>Body mass is recorded in grams. I remove observations with missing body mass or species values before calculating the summaries.</p>
-<div class="cell" data-execution_count="3">
+<div id="cell-clean-data" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>analysis_data <span class="op">=</span> penguins.dropna(</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    subset<span class="op">=</span>[<span class="st">"species"</span>, <span class="st">"body_mass_g"</span>]</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>).copy()</span>
@@ -356,13 +340,7 @@ Species: ['Adelie', 'Gentoo', 'Chinstrap']</code></pre>
 Rows after cleaning: 342
 Missing body-mass values after cleaning: 0</code></pre>
 </div>
-<div id="tbl-clean-data" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="3">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl quarto-uncaptioned" id="tbl-clean-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;3
-</figcaption>
-<div aria-describedby="tbl-clean-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="cell-output cell-output-display" data-execution_count="3">
+<div id="clean-data" class="cell-output cell-output-display" data-execution_count="3">
 <div>
 
 
@@ -442,9 +420,6 @@ Table&nbsp;3
 </div>
 </div>
 </div>
-</figure>
-</div>
-</div>
 <p>The cleaned dataset contains the observations needed for comparing body mass across species.</p>
 </section>
 <section id="compare-body-mass-by-species" class="level2">
@@ -466,15 +441,15 @@ Table&nbsp;3
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div id="tbl-body-mass-summary" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="4">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl quarto-uncaptioned" id="tbl-body-mass-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;4
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-body-mass-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Body mass (g) by species: count, mean, median and standard deviation.
 </figcaption>
 <div aria-describedby="tbl-body-mass-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 
 
-<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<table class="dataframe cell caption-top table table-sm table-striped small" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -571,7 +546,7 @@ Figure&nbsp;1: Body mass distributions for Palmer Penguins by species.
 <section id="findings" class="level2">
 <h2 class="anchored" data-anchor-id="findings">Findings</h2>
 <p>The summary statistics and figure show that body mass differs among the three penguin species.</p>
-<p>The species have different typical body masses, while the boxplots also show variation within each species. The mean and median values provide complementary summaries of the center of each distribution.</p>
+<p>Gentoo penguins are much heavier than the other two species, averaging about 5,076 g, while Adelie (about 3,701 g) and Chinstrap (about 3,733 g) penguins have very similar average body masses (<a href="#tbl-body-mass-summary" class="quarto-xref">Table&nbsp;1</a>). The boxplots in <a href="#fig-penguin-mass" class="quarto-xref">Figure&nbsp;1</a> show the same pattern, and also that the Adelie and Chinstrap distributions overlap almost completely.</p>
 <p>These are descriptive patterns in the Palmer Penguins dataset. This analysis does not perform a statistical hypothesis test or attempt to generalize beyond the observations represented by these data.</p>
 </section>
 <section id="conclusion" class="level2">

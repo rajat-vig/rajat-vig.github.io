@@ -23,7 +23,7 @@ The dataset is distributed with the `palmerpenguins` package, so the analysis do
 First, I load the Palmer Penguins data in R and remove observations that are missing body mass or species.
 
 ```{r}
-#| label: tbl-r-data
+#| label: r-data
 #| message: false
 #| warning: false
 
@@ -49,7 +49,7 @@ The cleaned dataset contains the observations needed for the analysis.
 I calculate the mean body mass for each penguin species.
 
 ```{r}
-#| label: tbl-r-summary
+#| label: r-summary
 
 r_summary <- analysis_data %>%
   group_by(species) %>%
@@ -74,13 +74,13 @@ The `reticulate` package allows R and Python to communicate within the same Quar
 I pass the cleaned R data to Python as a pandas DataFrame. Python then calculates the overall mean body mass.
 
 ```{python}
-#| label: tbl-python-summary
+#| label: python-summary
 
 import pandas as pd
 
 python_data = r.analysis_data
 
-overall_mean = python_data["body_mass_g"].mean()
+overall_mean = float(python_data["body_mass_g"].mean())
 
 print("Python received", len(python_data), "observations")
 print(f"Overall mean body mass: {overall_mean:.1f} g")
@@ -93,7 +93,7 @@ The Python code receives the object created in R and calculates a new result fro
 The Python result can also be accessed from R.
 
 ```{r}
-#| label: tbl-r-python-result
+#| label: r-python-result
 
 python_mean <- py$overall_mean
 
